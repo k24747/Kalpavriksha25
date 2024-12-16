@@ -1,121 +1,103 @@
 #include<stdio.h>
-#include<conio.h>
-#include<string.h>
 #include<stdlib.h>
-#define MAX 100
+#include<string.h>
 
 int isNum(char c) {
-    if(c>='0' && c<='9'){
-        return 1;
-    }
-    return 0;
-    }
-
-int isOperator(char c){
-    if(c=='+' || c=='-' || c=='*' || c=='/'){
-        return 1;
-    }
-    return 0;
-    }
-
-int Operation(int operand1 ,int operand2, char operator){
-    int ans  = 0;
-switch(operator){
-    case '+':
-    ans = operand1 + operand2;
-    break;
-
-    case '-':
-    ans = operand1 - operand2;
-    break;
-
-    case '*':
-    ans = operand1 * operand2;
-    break;
-
-    case '/':
-    if(operand2 == 0)
-    {
-        printf("Error: Division by zero.\n");
-        exit(0);
-    }
-    ans = operand1 / operand2;
-    break;
-    }
-
-    return ans;
+    return c >= '0' && c <= '9';
 }
 
-int precedence(char c){
-    return c=='+' || c=='-' ? 1 : 2;
-    }
+int isOperator(char c) {
+    return c == '+' || c == '-' || c == '*' || c == '/';
+}
 
-int Calculate(char expression[], int n){
-    int valueTop = -1, operatorTop = -1, flag = 1, i = 0;
-    int values[MAX], operators[MAX];
-
-    while(expression[i] != '\0'){
-        while(expression[i] == ' '){
-            i++;
-            continue;
-        }// Remove the whitespaces present in expression
-
-        if(isNum(expression[i])){
-            int num = 0;
-            while(i < n && isNum(expression[i])){ //converts multiple number char to int
-                num = num * 10 + (expression[i] - '0');
-                i++;
-            }
-            valueTop++;
-            values[valueTop] = num;
-            flag = 0;
-        }
-        else if(isOperator(expression[i])){
-            if(flag == 1){
-                printf("Error: Invalid expression.\n");
+int Operation(int operand1, int operand2, char operator) {
+    switch (operator) {
+        case '+': return operand1 + operand2;
+        case '-': return operand1 - operand2;
+        case '*': return operand1 * operand2;
+        case '/': 
+            if (operand2 == 0) {
+                printf("Error: Division by zero.\n");
                 exit(0);
             }
-            while(operatorTop != -1 && precedence(expression[i]) <= precedence(operators[operatorTop])){
+            return operand1 / operand2;
+    }
+    return 0;
+}
+
+int precedence(char c) {
+    return c == '+' || c == '-' ? 1 : 2;
+}
+
+int Calculate(char *expression, int n) {
+    int *values = (int*)malloc(n * sizeof(int));
+    char *operators = (char*)malloc(n * sizeof(char));
+    int valueTop = -1, operatorTop = -1, flag = 1, i = 0;
+
+    while(expression[i] != '\0') {
+        while(expression[i] == ' ') i++; 
+
+        if (isNum(expression[i])) {
+            int num = 0;
+            while(i < n && isNum(expression[i])) {
+                num = num * 10 + (expression[i++] - '0');
+            }
+            values[++valueTop] = num;
+            flag = 0;
+        } else if (isOperator(expression[i])) {
+            if (flag == 1) {
+                printf("Error: Invalid expression.\n");
+                free(values); free(operators);
+                exit(0);
+            }
+            while (operatorTop != -1 && precedence(expression[i]) <= precedence(operators[operatorTop])) {
                 int b = values[valueTop--];
                 int a = values[valueTop--];
                 char op = operators[operatorTop--];
-                int operationAns = Operation(a, b, op);
-                values[++valueTop] = operationAns;
+                values[++valueTop] = Operation(a, b, op);
             }
-            operators[++operatorTop] = expression[i];
-            i++;
+            operators[++operatorTop] = expression[i++];
             flag = 1;
-        }
-        else{
+        } else {
             printf("Error: Invalid expression.\n");
+            free(values); free(operators);
             exit(0);
         }
     }
-    if(flag == 1){
+
+    if (flag == 1) {
         printf("Error: Invalid expression.\n");
+        free(values); free(operators);
         exit(0);
     }
 
-    while(operatorTop != -1){
+    while (operatorTop != -1) {
         int b = values[valueTop--];
         int a = values[valueTop--];
         char op = operators[operatorTop--];
-        int operationAns = Operation(a, b, op);
-        values[++valueTop] = operationAns;
+        values[++valueTop] = Operation(a, b, op);
     }
-    return values[valueTop];
+
+    int result = values[valueTop];
+    free(values); free(operators);
+    return result;
 }
 
-int main(){
-    char expression[MAX];
-    int i = 0, ch;
+int main() {
+    char *expression = NULL;
+    int size = 0, ch, pos = 0;
 
-    while((ch = getchar()) != '\n' && ch != EOF && i < 99){
-        expression[i++] = ch;
+    while((ch = getchar()) != '\n') {
+        expression = realloc(expression, (pos + 1) * sizeof(char));
+        expression[pos++] = ch;
     }
-    expression[i] = '\0';
+    expression = realloc(expression, (pos + 1) * sizeof(char));
+    expression[pos] = '\0';
+
     int n = strlen(expression);
     int ans = Calculate(expression, n);
-    printf("%d", ans);
+    printf("%d\n", ans);
+
+    free(expression);
     return 0;
 }
