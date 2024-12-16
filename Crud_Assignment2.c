@@ -7,8 +7,7 @@ typedef struct user {
     char name[50];
 } USER;
 
-// Function to ensure the file exists
-void ensureFileExists() {
+void fileExists() {
     FILE *fp = fopen("users.txt", "r");
     if (fp == NULL) {
         fp = fopen("users.txt", "w");
@@ -20,7 +19,6 @@ void ensureFileExists() {
     fclose(fp);
 }
 
-// Add a new user
 void add() {
     FILE *fp = fopen("users.txt", "a");
     if (fp == NULL) {
@@ -31,10 +29,10 @@ void add() {
     USER user;
     printf("Enter ID: ");
     scanf("%d", &user.id);
-    getchar(); // Clear newline character from input buffer
+    getchar();
     printf("Enter Name: ");
     fgets(user.name, sizeof(user.name), stdin);
-    user.name[strcspn(user.name, "\n")] = '\0'; // Remove newline character
+    user.name[strcspn(user.name, "\n")] = '\0';
     printf("Enter Age: ");
     scanf("%d", &user.age);
 
@@ -43,7 +41,6 @@ void add() {
     printf("User added successfully.\n");
 }
 
-// Display all users
 void display() {
     FILE *fp = fopen("users.txt", "r");
     if (fp == NULL) {
@@ -154,7 +151,7 @@ void update() {
         if (user.id == tid) {
             found = 1;
             printf("Enter new Name: ");
-            getchar(); // Clear newline
+            getchar();
             fgets(user.name, sizeof(user.name), stdin);
             user.name[strcspn(user.name, "\n")] = '\0';
             printf("Enter new Age: ");
@@ -176,7 +173,7 @@ void update() {
 }
 
 int main() {
-    ensureFileExists();
+    fileExists();
 
     int choice;
     do {
