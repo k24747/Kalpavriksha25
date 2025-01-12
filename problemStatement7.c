@@ -37,7 +37,6 @@ char * getLongestWord(char *input, int inputLength){
                 maxi = currentLength;
                 longestWord = currentWord;
             }
-
             currentWord = input + 1;
         }
         input++;
