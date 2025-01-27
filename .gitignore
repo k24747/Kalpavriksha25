@@ -9,3 +9,15 @@ linkedlistCRUD.c
 llcrud
 mycrud.c
 sample.txt
+# Ignore the existing files
+2dNameAssignment.c
+Calculator_Assignment1.c
+Crud_Assignment2.c
+LinkedList_CRUD.c
+longestPalindromic.c
+modulusAssign.c
+problemStatement8.c
+removeAdjacentDuplicates.c
+rotationMatch.c
+smallestWindow.c
+stringPerm.c
