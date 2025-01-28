@@ -1,11 +1,3 @@
-a.out
-adjacent
-adjacent.c
-alternate.c
-crudLL
-factorial.c
-LinkedList_CRUD.c
-linkedlistCRUD.c
-llcrud
-mycrud.c
-sample.txt
+# Ignore all files except my new files
+*
+!<new-file>
