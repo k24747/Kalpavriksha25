@@ -8,15 +8,36 @@ typedef struct Node{
     struct Node* next;
 }Node;
 
+int idExists(Node *head, int id){
+    while(head){
+        if(head->id == id) return 1;
+        head = head->next;
+    }
+    return 0;
+}
+
+int isValid(char *condi){
+    return (strcmp(condi, "Critical") == 0 || strcmp(condi, "Serious") == 0 || strcmp(condi, "Stable") == 0);
+}
+
 Node *createNode(int id, char *condi){
     Node *newNode = (Node *)malloc(sizeof(Node));
     newNode->id = id;
     newNode->condition = (char *)malloc(101 * sizeof(char));
     strcpy(newNode->condition, condi);
     newNode->next = NULL;
+    return newNode;
 }
 
 void createLinkedList(Node **head, int id, char *condi){
+    if(idExists(*head, id)){
+        printf("Error: ID %d already exists!\n", id);
+        return;
+    }
+    if(!isValid(condi)){
+        printf("Error: Invalid condition '%s'. Allowed values: Critical, Serious, Stable\n", condi);
+        return;
+    }
     Node *newNode = createNode(id, condi);
     if(*head == NULL){
         *head = newNode;
