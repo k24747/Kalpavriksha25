@@ -1,3 +1,13 @@
+/*
+Time Complexity:
+Push Operation: O(1) since adding an element at the rear of the queue is a constant-time operation.
+Pop Operation: O(1) since removing an element from the rear is also a constant-time operation.
+Peek Operation: O(1) as accessing the last inserted element is constant time.
+Size Operation: O(1) because it computes the size by checking the difference between the front and rear indices.
+Space Complexity:
+The space complexity is O(n), where n is the number of elements in the stack, because the queue is storing the elements.
+*/
+
 #include<stdio.h>
 #include<stdlib.h>
 

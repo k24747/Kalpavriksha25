@@ -1,3 +1,14 @@
+/*
+Time Complexity:
+Enqueue: O(1) – Inserting an element into the stack is done in constant time.
+Dequeue: O(n) – In the worst case, the dequeue operation requires transferring all elements 
+from one stack to another, which is linear in time.
+Peek: O(n) – we might need to transfer elements to access the front, which takes linear time.
+Size: O(1) – The size is stored directly and can be accessed in constant time.
+Space Complexity:
+O(n) – The space complexity is proportional to the number of elements in the stack as we're using one stack to hold the elements. 
+*/
+
 #include<stdio.h>
 #include<stdlib.h>
 

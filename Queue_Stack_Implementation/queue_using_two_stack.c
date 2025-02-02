@@ -1,3 +1,13 @@
+/*
+Time Complexity:
+Enqueue: O(1) – Pushing onto the first stack (s1) is constant time.
+Dequeue: O(n) – In the worst case, when s2 is empty, all n elements from s1 have to be transferred to s2, which takes linear time.
+Peek: O(n) – Similar to dequeue, in the worst case, when s2 is empty, elements from s1 have to be transferred to s2.
+Size: O(1) – The size is calculated by adding the number of elements in s1 and s2, which is a constant time operation.
+Space Complexity: O(n) – The space complexity is proportional to the total number of elements in both stacks combined (s1 and s2), 
+as they hold all the elements of the queue.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 

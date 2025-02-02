@@ -1,3 +1,12 @@
+/*
+Time Complexity : 
+O(1) for all operations (enqueue, dequeue, peek, isEmpty, and Size) as they all involve 
+only simple checks or pointer manipulations.
+Space Complexity:
+O(n) where n is the number of elements in the queue. 
+The space is mainly used to store the queue elements in the dynamically allocated array q->array.
+*/
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>

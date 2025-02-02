@@ -1,3 +1,14 @@
+/*
+Time Complexity:
+Push Operation: The push operation involves moving all elements from q1 to q2 and then swapping the two queues. 
+This results in an O(n) time complexity for push operations, where n is the number of elements in the stack.
+Pop Operation: The pop operation is O(1), as it simply dequeues an element from q1.
+Peek Operation: The peek operation is O(1) since it just looks at the front element of q1.
+Size Operation: The size operation is O(1) since it simply returns the difference between the rear and front of q1.
+Space Complexity:
+The space complexity is O(n) where n is the number of elements in the stack, as both queues need to store all the elements.
+*/
+
 #include<stdio.h>
 #include<stdlib.h>
 

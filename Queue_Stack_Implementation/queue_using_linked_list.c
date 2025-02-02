@@ -1,3 +1,13 @@
+/*
+Time Complexity:
+enqueue: O(1) – Insertion at the rear is done in constant time.
+dequeue: O(1) – Removal from the front is done in constant time.
+peek: O(1) – Accessing the front element takes constant time.
+isEmpty: O(1) – Checking if the queue is empty is done in constant time.
+size: O(1) – The size is directly stored and can be accessed in constant time.
+Space Complexity: O(n), where n is the number of elements in the queue, since the queue is implemented using a linked list. 
+*/
+
 #include<stdio.h>
 #include<stdlib.h>
 

@@ -1,3 +1,13 @@
+/*
+Time Complexity:
+push: O(1)
+pop: O(n) (due to traversal)
+peek: O(1)
+isEmpty: O(1)
+size: O(n) (due to traversal)
+Space Complexity: O(n) (since the total memory usage grows with the number of nodes in the stack)
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 

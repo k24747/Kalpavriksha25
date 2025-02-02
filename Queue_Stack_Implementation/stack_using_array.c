@@ -1,3 +1,13 @@
+/*
+Time Complexity:
+Push: O(1).
+Pop: O(1).
+Peek: O(1).
+Size: O(1).
+Space Complexity:
+O(n), where n is the number of elements in the stack.
+*/
+
 #include<stdio.h>
 #include<stdlib.h>
 
