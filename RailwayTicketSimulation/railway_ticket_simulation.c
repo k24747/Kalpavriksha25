@@ -59,7 +59,7 @@ enum priority{ VIP, SENIOR_CITIZEN, GENERAL };
 
 typedef struct Passeneger{
     int id;
-    char name[50];
+    char *name;
     enum priority prio;
 }Passeneger;
 
@@ -109,7 +109,7 @@ void enqueue(PriorityQueue *pq, int id, char *pri, char *name){
     Passeneger newPassenger;
     newPassenger.id = id;
     newPassenger.prio = getEnumFromString(pri);
-    strcpy(newPassenger.name, name);
+    newPassenger.name = name;
     int i = pq->size-1;
     while(i >= 0 && pq->queue[i].prio > newPassenger.prio){
         pq->queue[i+1] = pq->queue[i];
@@ -146,7 +146,7 @@ int main(){
         scanf("%d", &choice);
         if(choice == 1){
             int pId;
-            char name[51]; 
+            char *name = (char *)malloc(51 * sizeof(char)); 
             char passengerType[15];
             scanf(",%d, %[^,], \"%[^\"]\";", &pId, passengerType, name);     
             enqueue(&pq, pId, passengerType, name);
